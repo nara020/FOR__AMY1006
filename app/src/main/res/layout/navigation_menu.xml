@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:id="@+id/nav_menu"
+    android:background="#C1FFEB3B">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@mipmap/ic_launcher_close"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:id="@+id/info"
+        android:drawableLeft="@mipmap/ic_launcher_info"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:text="Internal information" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:id="@+id/qr"
+        android:drawableLeft="@mipmap/ic_launcher_qr"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="QR code scanner" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:id="@+id/language"
+        android:background="#FFFFFF"
+        android:drawableLeft="@mipmap/ic_launcher_language"
+        android:gravity="center"
+        android:text="Translation" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:id="@+id/map"
+        android:background="#FFFFFF"
+        android:drawableLeft="@mipmap/ic_launcher_map"
+        android:gravity="center"
+        android:text="Map" />
+
+</LinearLayout>

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:drawableLeft="@mipmap/ic_launcher_korea"
+        android:singleLine="true"
+        android:text="진고깃집(Jingogitjip)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="황제갈비(Hwangjegalbi)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00F8F8F8"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="에담한식부페(Yedamhansikbupe)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="김밥천국 수원대점(Gimbapcheonguk)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="착한왕만두(Chakanwangmandu)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="한판승부(Hanpanseungbu)" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+
+    <Button
+        android:id="@+id/_7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="돈비가(Donbiga)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_8"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="본죽 수원대점(Bonjuk)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_9"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="복돼지연탄구이(Bokdwaejiyeontangui)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="1인자 24시간감자탕뼈해장국 와우점(Irinja)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_11"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="제주도그릴(Jejudogeuril)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_12"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="천호숯불꼼장어(Cheonhosutbulkkomjangeo)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_13"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00F8F8F8"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="큰맘할매순대국(Keunmamhalmaesundaeguk)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_14"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="내가찜한닭(Naegajjimhandak)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_15"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="국수나무(Guksunamu)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_16"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="찌개지존(Jjigaejijon)" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+
+    <Button
+        android:id="@+id/_17"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="등촌샤브칼국수(Deungchonsyabeukalguksu)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_18"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="탄탄석쇠(Tantanseoksoe)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_19"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="우가돈가(Ugadonga)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_20"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="꽃소(Kkotso)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_21"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="땅스부대찌개(Ttangseubudaejjigae)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_22"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="전주집(Jeonjujip)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_23"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00F8F8F8"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="영웅갈매기(Yeongunggalmaegi)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_24"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="와우순대국(Wausundaeguk)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_25"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="여장군 수원대점(Yeojanggun)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_26"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="행복한모임터(Haengbokanmoimteo)" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+
+    <Button
+        android:id="@+id/_27"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="차돌네 묵은지닭볶음탕(Chadolle)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_28"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="정가네곱창전골(Jeonggane)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_29"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="참조은고기(Chamjoeungogi)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_30"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:text="다주리감자탕(Dajurigamjatang)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_31"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="24시전주명가콩나물국밥(jeonjumyeonggakongnamulgukbap)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_32"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="장수소머리국밥(Jangsusomeorigukbap)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_33"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00F8F8F8"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="아르또맛집(Areuttomatjip)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_34"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="민우네(Minune)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+    android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_35"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="화사랑(Hoesarang)" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <Button
+        android:id="@+id/_36"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:singleLine="true"
+        android:layout_margin="10dp"
+        android:text="The석쇠불고기and철판삼겹살(the Seoksoebulgogi)" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+</LinearLayout>
+</ScrollView>
