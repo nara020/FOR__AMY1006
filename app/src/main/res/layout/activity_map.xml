@@ -4,15 +4,78 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_main"
+    android:id="@+id/layout_map"
     tools:context=".mapActivity">
 
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
 
+        class="com.google.android.gms.maps.MapFragment" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+    <Button
+        android:text="Search for restaurants in 3Km near me"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:layout_weight="0.1"
+        android:id="@+id/button"
+        android:orientation="horizontal"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:text="Search for restaurants offering electronic menu service"
+        tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+            android:id="@+id/korea_food1"
+            android:background="@mipmap/ic_launcher_korea"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:id="@+id/china_food1"
+            android:background="@mipmap/ic_launcher_china"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:id="@+id/japan_food1"
+            android:background="@mipmap/ic_launcher_japan"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:id="@+id/italy_food1"
+            android:background="@mipmap/ic_launcher_italy"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:id="@+id/fast_food1"
+            android:background="@mipmap/ic_launcher_hamburger"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:id="@+id/night_food1"
+            android:background="@mipmap/ic_launcher_night"/>
+    </LinearLayout>
 </LinearLayout>

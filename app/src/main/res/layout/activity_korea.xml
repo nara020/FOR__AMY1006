@@ -53,7 +53,7 @@
         android:background="#00F8F8F8"
         android:singleLine="true"
         android:layout_margin="10dp"
-        android:text="에담한식부페(Yedamhansikbupe)" />
+        android:text="예담한식부페(Yedamhansikbupe)" />
 
     <View
         android:layout_width="match_parent"

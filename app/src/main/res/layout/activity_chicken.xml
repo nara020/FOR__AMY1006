@@ -218,7 +218,7 @@
         android:background="#00FFFFFF"
         android:singleLine="true"
         android:layout_margin="10dp"
-        android:text="티바두마리치킨 봉담점(Tibadumari chicken)" />
+        android:text="티바두마리치킨 봉담점(Tibadumari chickn)" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

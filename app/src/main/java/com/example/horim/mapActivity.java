@@ -1,17 +1,8 @@
 package com.example.horim;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,7 +12,14 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -32,8 +30,8 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -41,16 +39,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import noman.googleplaces.NRPlaces;
+import noman.googleplaces.Place;
+import noman.googleplaces.PlaceType;
+import noman.googleplaces.PlacesException;
+import noman.googleplaces.PlacesListener;
 
 public class mapActivity extends AppCompatActivity
-        implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback{
+        implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,  PlacesListener{
 
 
-    private GoogleMap mMap;
+
+    private GoogleMap mGoogleMap = null;
     private Marker currentMarker = null;
 
     private static final String TAG = "googlemap_example";
@@ -80,21 +84,172 @@ public class mapActivity extends AppCompatActivity
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
+    List<Marker> previous_marker = null;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_map);
 
-        setContentView(R.layout.activity_main);
+        previous_marker = new ArrayList<Marker>();
 
-        mLayout = findViewById(R.id.layout_main);
+
+
+
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                        showPlaceInformation(currentPosition);
+
+
+            }
+        });
+
+        Button button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mGoogleMap.clear();
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_NightFood();
+                ShowServiceRestorant_Itary();
+                ShowServiceRestorant_Japan();
+                ShowServiceRestorant_China();
+                ShowServiceRestorant_Chicken();
+                ShowServiceRestorant_FastFood();
+                ShowServiceRestorant_Korea();
+
+            }
+        });
+
+        Button korea_food1 =  (Button)findViewById(R.id.korea_food1);
+        korea_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_Korea();
+
+
+            }
+        });
+
+        Button china_food1 =  (Button)findViewById(R.id.china_food1);
+        china_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_China();
+
+
+            }
+        });
+
+        Button japan_food1 =  (Button)findViewById(R.id.japan_food1);
+        japan_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_Japan();
+
+
+
+            }
+        });
+
+        Button italy_food1 =  (Button)findViewById(R.id.italy_food1);
+        italy_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_Itary();
+
+
+            }
+        });
+
+        Button fast_food1 =  (Button)findViewById(R.id.fast_food1);
+        fast_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_FastFood();
+
+
+            }
+        });
+
+        Button night_food1 =  (Button)findViewById(R.id.night_food1);
+        night_food1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleMap.clear();//지도 클리어
+
+
+
+                if (previous_marker != null)
+                    previous_marker.clear();//지역정보 마커 클리어
+
+                ShowServiceRestorant_NightFood();
+
+
+            }
+        });
+
+
+        mLayout = findViewById(R.id.layout_map);
+
+
+        Log.d(TAG, "onCreate");
+
+
 
         locationRequest = new LocationRequest()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+               // .setInterval(UPDATE_INTERVAL_MS)
+            //    .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
 
         LocationSettingsRequest.Builder builder =
@@ -105,108 +260,13 @@ public class mapActivity extends AppCompatActivity
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-    @Override
-    public void onMapReady(final GoogleMap googleMap) {
-        Log.d(TAG, "onMapReady :");
 
 
-
-        mMap = googleMap;
-//한식
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(37.214887,126.978452));
-        markerOptions.title("진고깃집(Jingogitjip)");
-        markerOptions.snippet("고깃집");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        mMap.addMarker(markerOptions);
-
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(new LatLng(11,11))
-                .title("황제갈비(Hwangjegalbi)")
-                .snippet("고깃집")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        mMap.addMarker(markerOptions1);
-
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(new LatLng(11,11))
-                .title("황제갈비(Hwangjegalbi)")
-                .snippet("고깃집")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        mMap.addMarker(markerOptions2);
-
-
-        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-        //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
-
-
-
-        //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
-
-
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
-
-            // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
-
-
-            startLocationUpdates(); // 3. 위치 업데이트 시작
-
-
-        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
-
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
-                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-
-                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions( mapActivity.this, REQUIRED_PERMISSIONS,
-                                PERMISSIONS_REQUEST_CODE);
-                    }
-                }).show();
-
-
-            } else {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
-            }
-
-        }
-
-
-
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                Log.d( TAG, "onMapClick :");
-            }
-        });
-    }
 
     LocationCallback locationCallback = new LocationCallback() {
         @Override
@@ -271,11 +331,93 @@ public class mapActivity extends AppCompatActivity
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
             if (checkPermission())
-                mMap.setMyLocationEnabled(true);
+                mGoogleMap.setMyLocationEnabled(true);
 
         }
 
     }
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        Log.d(TAG, "onMapReady :");
+
+        mGoogleMap = googleMap;
+
+
+        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
+        //지도의 초기위치를 서울로 이동
+        setDefaultLocation();
+
+
+
+        //런타임 퍼미션 처리
+        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+
+            // 2. 이미 퍼미션을 가지고 있다면
+            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
+
+
+            startLocationUpdates(); // 3. 위치 업데이트 시작
+
+
+        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+
+            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+
+                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
+                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
+                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                        ActivityCompat.requestPermissions( mapActivity.this, REQUIRED_PERMISSIONS,
+                                PERMISSIONS_REQUEST_CODE);
+                    }
+                }).show();
+
+
+            } else {
+                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
+                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
+                        PERMISSIONS_REQUEST_CODE);
+            }
+
+        }
+
+
+
+        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                Log.d( TAG, "onMapClick :");
+            }
+        });
+
+
+
+    }
+
+
 
 
     @Override
@@ -289,8 +431,8 @@ public class mapActivity extends AppCompatActivity
             Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-            if (mMap!=null)
-                mMap.setMyLocationEnabled(true);
+            if (mGoogleMap!=null)
+                mGoogleMap.setMyLocationEnabled(true);
 
         }
 
@@ -372,10 +514,10 @@ public class mapActivity extends AppCompatActivity
         markerOptions.draggable(true);
 
 
-        currentMarker = mMap.addMarker(markerOptions);
+        currentMarker = mGoogleMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+        mGoogleMap.moveCamera(cameraUpdate);
 
     }
 
@@ -397,10 +539,14 @@ public class mapActivity extends AppCompatActivity
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        currentMarker = mMap.addMarker(markerOptions);
+
+
+        ShowServiceRestorant_Korea();
+
+        currentMarker = mGoogleMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
-        mMap.moveCamera(cameraUpdate);
+        mGoogleMap.moveCamera(cameraUpdate);
 
     }
 
@@ -545,6 +691,548 @@ public class mapActivity extends AppCompatActivity
         }
     }
 
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
+
+    }
+
+    @Override
+    public void onPlacesStart() {
+
+    }
+
+    @Override
+    public void onPlacesSuccess(final List<Place> places) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                for (noman.googleplaces.Place place : places) {
+
+                    LatLng latLng
+                            = new LatLng(place.getLatitude()
+                            , place.getLongitude());
+
+                    String markerSnippet = getCurrentAddress(latLng);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.title(place.getName());
+                    markerOptions.snippet(markerSnippet);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    Marker item = mGoogleMap.addMarker(markerOptions);
+                    previous_marker.add(item);
+
+
+
+                }
+
+                /*//중복 마커 제거
+                HashSet<Marker> hashSet = new HashSet<Marker>();
+                hashSet.addAll(previous_marker);
+                previous_marker.clear();
+                previous_marker.addAll(hashSet);
+*/
+            }
+        });
+
+    }
+
+    @Override
+    public void onPlacesFinished() {
+
+    }
+
+    public void showPlaceInformation(LatLng location)
+    {
+
+     //   mGoogleMap.clear();//지도 클리어
+
+
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(mapActivity.this)
+                .key("AIzaSyDf9KVO1G-IYdoOrBNYd5QCNcS5BLgCl2w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(3000) //500 미터 내에서 검색
+                .type(PlaceType.RESTAURANT) //음식점
+                .build()
+                .execute();
+    }
+
+    public void ShowServiceRestorant_Korea() {
+
+
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(new LatLng(37.214887, 126.978452))
+                .title("황제갈비(Hwangjegalbi)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions1);
+
+        MarkerOptions markerOptions2 = new MarkerOptions();
+        markerOptions2.position(new LatLng(37.213580, 126.975345))
+                .title("본죽 수원대점(Bonjuk)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions2);
+
+        MarkerOptions markerOptions3 = new MarkerOptions();
+        markerOptions3.position(new LatLng(37.214058, 126.977880))
+                .title("파파이스 수원대점(Popeyes)")
+                .snippet("Hamburger")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions3);
+
+        MarkerOptions markerOptions4 = new MarkerOptions();
+        markerOptions4.position(new LatLng(37.214887, 126.978452))
+                .title("진고깃집(Jingogitjip)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions4);
+
+        MarkerOptions markerOptions5 = new MarkerOptions();
+        markerOptions5.position(new LatLng(37.209777, 126.981168))
+                .title("예담한식부페(Yedamhansikbupe)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions5);
+
+        MarkerOptions markerOptions6 = new MarkerOptions();
+        markerOptions6.position(new LatLng(37.215764, 126.976647))
+                .title("착한왕만두(Chakanwangmandu)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions6);
+
+        MarkerOptions markerOptions7 = new MarkerOptions();
+        markerOptions7.position(new LatLng(37.215574, 126.976476))
+                .title("한판승부(Hanpanseungbu)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions7);
+
+        MarkerOptions markerOptions8 = new MarkerOptions();
+        markerOptions8.position(new LatLng(37.214040, 126.974053))
+                .title("돈비가(Donbiga)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions8);
+
+        MarkerOptions markerOptions9 = new MarkerOptions();
+        markerOptions9.position(new LatLng(37.213916, 126.978159))
+                .title("복돼지연탄구이(Bokdwaejiyeontangui)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions9);
+
+        MarkerOptions markerOptions10 = new MarkerOptions();
+        markerOptions10.position(new LatLng(37.214744, 126.978007))
+                .title("1인자 24시간감자탕뼈해장국 와우점(Irinja)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions10);
+
+        MarkerOptions markerOptions11 = new MarkerOptions();
+        markerOptions11.position(new LatLng(37.214731, 126.977393))
+                .title("제주도그릴(Jejudogeuril)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions11);
+
+        MarkerOptions markerOptions12 = new MarkerOptions();
+        markerOptions12.position(new LatLng(37.214168, 126.976052))
+                .title("큰맘할매순대국(Keunmamhalmaesundaeguk)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions12);
+
+        MarkerOptions markerOptions13 = new MarkerOptions();
+        markerOptions13.position(new LatLng(37.214404, 126.978962))
+                .title("내가찜한닭(Naegajjimhandak)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions13);
+
+        MarkerOptions markerOptions14 = new MarkerOptions();
+        markerOptions14.position(new LatLng(37.213740, 126.974806))
+                .title("국수나무(Guksunamu)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions14);
+
+        MarkerOptions markerOptions15 = new MarkerOptions();
+        markerOptions15.position(new LatLng(37.214168, 126.976054))
+                .title("찌개지존(Jjigaejijon)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions15);
+
+        MarkerOptions markerOptions16 = new MarkerOptions();
+        markerOptions16.position(new LatLng(37.214777, 126.976597))
+                .title("등촌샤브칼국수(Deungchonsyabeukalguksu)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions16);
+
+        MarkerOptions markerOptions17 = new MarkerOptions();
+        markerOptions17.position(new LatLng(37.214395, 126.977924))
+                .title("탄탄석쇠(Tantanseoksoe)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions17);
+
+        MarkerOptions markerOptions18 = new MarkerOptions();
+        markerOptions18.position(new LatLng(37.214681, 126.977057))
+                .title("우가돈가(Ugadonga)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions18);
+
+        MarkerOptions markerOptions19 = new MarkerOptions();
+        markerOptions19.position(new LatLng(37.214192, 126.975897))
+                .title("꽃소(Kkotso)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions19);
+
+
+        MarkerOptions markerOptions20 = new MarkerOptions();
+        markerOptions20.position(new LatLng(37.214681, 126.977057))
+                .title("전주집(Jeonjujip)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions20);
+
+        MarkerOptions markerOptions21 = new MarkerOptions();
+        markerOptions21.position(new LatLng(37.215249, 126.977306))
+                .title("와우순대국(Wausundaeguk)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions21);
+
+        MarkerOptions markerOptions22 = new MarkerOptions();
+        markerOptions22.position(new LatLng(37.214202, 126.975898))
+                .title("여장군 수원대점(Yeojanggun)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions22);
+
+        MarkerOptions markerOptions23 = new MarkerOptions();
+        markerOptions23.position(new LatLng(37.214087, 126.978187))
+                .title("행복한모임터(Haengbokanmoimteo)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions23);
+
+        MarkerOptions markerOptions24 = new MarkerOptions();
+        markerOptions24.position(new LatLng(37.214279, 126.976259))
+                .title("차돌네 묵은지닭볶음탕(Chadolle)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions24);
+
+        MarkerOptions markerOptions25 = new MarkerOptions();
+        markerOptions25.position(new LatLng(37.214699, 126.977581))
+                .title("정가네곱창전골(Jeonggane)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions25);
+
+        MarkerOptions markerOptions26 = new MarkerOptions();
+        markerOptions26.position(new LatLng(37.213814, 126.976198))
+                .title("24시전주명가콩나물국밥(jeonjumyeonggakongnamulgukbap)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions26);
+
+        MarkerOptions markerOptions27 = new MarkerOptions();
+        markerOptions27.position(new LatLng(37.205835, 126.980529))
+                .title("아르또맛집(Areuttomatjip)")
+                .snippet("Korea Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions27);
+    }
+    public void ShowServiceRestorant_Chicken() {
+
+        MarkerOptions markerOptions28 = new MarkerOptions();
+        markerOptions28.position(new LatLng(37.214066, 126.975798))
+                .title("bhc치킨 화성와우리점(bhc chicken)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions28);
+
+        MarkerOptions markerOptions29 = new MarkerOptions();
+        markerOptions29.position(new LatLng(37.214337, 126.974953))
+                .title("블랙꼬끄(black Kkokkeu)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions29);
+
+        MarkerOptions markerOptions30 = new MarkerOptions();
+        markerOptions30.position(new LatLng(37.214393, 126.978962))
+                .title("맘스터치 수원대점(Mom's Touch)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions30);
+
+        MarkerOptions markerOptions31 = new MarkerOptions();
+        markerOptions31.position(new LatLng(37.214043, 126.979631))
+                .title("짱닭치킨 화성수원대점(Jjangdak chicken)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions31);
+
+        MarkerOptions markerOptions32 = new MarkerOptions();
+        markerOptions32.position(new LatLng(37.214010, 126.974052))
+                .title("가마로강정 화성와우점(Gamarogangjeong)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions32);
+
+        MarkerOptions markerOptions33 = new MarkerOptions();
+        markerOptions33.position(new LatLng(37.213386, 126.974157))
+                .title("가마치통닭 수원대점(Gamachitongdak)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions33);
+
+        MarkerOptions markerOptions34 = new MarkerOptions();
+        markerOptions34.position(new LatLng(37.214283, 126.976253))
+                .title("또래오래 화성수원대점(Ttoraeorae)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions34);
+
+        MarkerOptions markerOptions35 = new MarkerOptions();
+        markerOptions35.position(new LatLng(37.213558, 126.975645))
+                .title("훌랄라참숯바베큐 와우1점(Hullallachamsut BBQ)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions35);
+
+        MarkerOptions markerOptions36 = new MarkerOptions();
+        markerOptions36.position(new LatLng(37.213951, 126.974550))
+                .title("치킨마루 와우리점(chicken Maru)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions36);
+
+        MarkerOptions markerOptions37 = new MarkerOptions();
+        markerOptions37.position(new LatLng(37.215625, 126.976889))
+                .title("도담치킨 수원대점(Dodam chicken)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions37);
+
+        MarkerOptions markerOptions38 = new MarkerOptions();
+        markerOptions38.position(new LatLng(37.212820, 126.973819))
+                .title("부어치킨 수원대점(Bueo chicken)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions38);
+
+        MarkerOptions markerOptions39 = new MarkerOptions();
+        markerOptions39.position(new LatLng(37.215634, 126.976893))
+                .title("티바두마리치킨 봉담점(Tibadumari chickn)")
+                .snippet("Chicken")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions39);
+    }
+
+    public void ShowServiceRestorant_Itary() {
+
+        MarkerOptions markerOptions52 = new MarkerOptions();
+        markerOptions52.position(new LatLng(37.214286,126.974865))
+                .title("파스타하임(pasta heim)")
+                .snippet("Italy Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions52);
+    }
+
+    public void ShowServiceRestorant_FastFood(){
+
+        MarkerOptions markerOptions62 = new MarkerOptions();
+        markerOptions62.position(new LatLng(37.213558,126.975645))
+                .title("59쌀피자(Ogussalpizza)")
+                .snippet("Pizza")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions62);
+
+        MarkerOptions markerOptions63 = new MarkerOptions();
+        markerOptions63.position(new LatLng(37.215653,126.976878))
+                .title("피자스쿨(pizza school)")
+                .snippet("Pizza")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions63);
+
+        MarkerOptions markerOptions64 = new MarkerOptions();
+        markerOptions64.position(new LatLng(37.213682,126.974924))
+                .title("버거킹 화성봉담점(burger king)")
+                .snippet("HamBurger")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions64);
+
+    }
+    public void ShowServiceRestorant_NightFood(){
+
+        MarkerOptions markerOptions43 = new MarkerOptions();
+        markerOptions43.position(new LatLng(37.213586, 126.975342))
+                .title("닭발왕(Dakbarwang)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions43);
+
+        MarkerOptions markerOptions45 = new MarkerOptions();
+        markerOptions45.position(new LatLng(37.214555,126.974000))
+                .title("사탄곱창(Satangopchang)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions45);
+
+        MarkerOptions markerOptions46 = new MarkerOptions();
+        markerOptions46.position(new LatLng(37.210721,126.970367))
+                .title("전설의곱창(Jeonseoruigopchang)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions46);
+
+        MarkerOptions markerOptions47 = new MarkerOptions();
+        markerOptions47.position(new LatLng(37.214408,126.977881))
+                .title("수원닭발(Suwondakbal)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions47);
+
+        MarkerOptions markerOptions48 = new MarkerOptions();
+        markerOptions48.position(new LatLng(37.214624,126.977718))
+                .title("와우곱창(Waugopchang)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions48);
+
+        MarkerOptions markerOptions49 = new MarkerOptions();
+        markerOptions49.position(new LatLng(37.214129,126.976544))
+                .title("가장맛있는족발(Gajangmasinneunjokbal)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions49);
+
+        MarkerOptions markerOptions50 = new MarkerOptions();
+        markerOptions50.position(new LatLng(37.210725,126.970368))
+                .title("깡패족발(Kkangpaejokbal)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions50);
+
+        MarkerOptions markerOptions51 = new MarkerOptions();
+        markerOptions51.position(new LatLng(37.214183,126.977057))
+                .title("화덕구이족보통(Hwadeokguijokbotong)")
+                .snippet("Night Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions51);
+
+    }
+    public void ShowServiceRestorant_China(){
+
+        MarkerOptions markerOptions53 = new MarkerOptions();
+        markerOptions53.position(new LatLng(37.213823,126.976742))
+                .title("홍콩반점0410 화성수원대점(Hongkongbanjeom)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions53);
+
+        MarkerOptions markerOptions54 = new MarkerOptions();
+        markerOptions54.position(new LatLng(37.2143568,126.979019))
+                .title("챠이챠이 수원대점(Chyaichyai)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions54);
+
+        MarkerOptions markerOptions55 = new MarkerOptions();
+        markerOptions55.position(new LatLng(37.215203,126.978533))
+                .title("청마루중국집(Cheongmaru)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions55);
+
+        MarkerOptions markerOptions56 = new MarkerOptions();
+        markerOptions56.position(new LatLng(37.214294,126.976261))
+                .title("홍보석(Hongboseok)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions56);
+
+        MarkerOptions markerOptions57 = new MarkerOptions();
+        markerOptions57.position(new LatLng(37.215177,126.976492))
+                .title("진쿵푸마라탕(jonKungfuMaratang)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions57);
+
+        MarkerOptions markerOptions58 = new MarkerOptions();
+        markerOptions58.position(new LatLng(37.214769,126.972514))
+                .title("로충칭마라탕 화성봉담점(Rongchungchingmaratang)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions58);
+
+        MarkerOptions markerOptions59 = new MarkerOptions();
+        markerOptions59.position(new LatLng(37.215201,126.977595))
+                .title("하오츠양꼬치(Haocheuyangkkochi)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions59);
+
+        MarkerOptions markerOptions60 = new MarkerOptions();
+        markerOptions60.position(new LatLng(37.214923,126.978377))
+                .title("취향저격안심탕수육(Chwihyangjeogyeogansimtangsuyuk)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions60);
+
+        MarkerOptions markerOptions61 = new MarkerOptions();
+        markerOptions61.position(new LatLng(37.216430,126.975521))
+                .title("중국전통삼겸찝 동파육(tongpayuk)")
+                .snippet("China Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions61);
+
+    }
+
+        public void ShowServiceRestorant_Japan() {
+        MarkerOptions markerOptions40 = new MarkerOptions();
+        markerOptions40.position(new LatLng(37.214025, 126.974056))
+                .title("최고당돈가스 수원대점(Choegodang dongaseu)")
+                .snippet("Japan Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions40);
+
+        MarkerOptions markerOptions41 = new MarkerOptions();
+        markerOptions41.position(new LatLng(37.213994, 126.979792))
+                .title("산쪼메 수원대점(Sanjjome)")
+                .snippet("Japan Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions41);
+
+        MarkerOptions markerOptions42 = new MarkerOptions();
+        markerOptions42.position(new LatLng(37.215192, 126.978532))
+                .title("이찌돈 와우점(Ijjidon)")
+                .snippet("Japan Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions42);
+
+        MarkerOptions markerOptions44 = new MarkerOptions();
+        markerOptions44.position(new LatLng(37.214194, 126.975895))
+                .title("참치사랑(Chamchisarang)")
+                .snippet("Japan Food")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mGoogleMap.addMarker(markerOptions44);
+    }
 
 
 }
