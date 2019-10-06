@@ -1,67 +1,42 @@
 package com.example.horim;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 
 
-    private EditText mEmailText,mPasswordText;
-    private FirebaseAuth mAuth =FirebaseAuth.getInstance();
-    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
+public class SignupActivity extends AppCompatActivity
+        {
 
+    private GoogleMap mMap;
 
+    private WebView mWebView;
+    private WebSettings mWebSettings;
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
 
-        mEmailText= findViewById(R.id.sign_email);
-        mPasswordText= findViewById(R.id.sign_password);
+        mWebView = (WebView)findViewById(R.id.webview_community);
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebSettings = mWebView.getSettings();
+        mWebSettings.setJavaScriptEnabled(true);
 
-        findViewById(R.id.sign_success).setOnClickListener(this);
+        mWebView.loadUrl("http://15.164.102.145/g5/bbs/board.php?bo_table=free");
     }
 
-    @Override
-    public void onClick(View v) {
-        mAuth.createUserWithEmailAndPassword(mEmailText.getText().toString(), mPasswordText.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if (user !=null) {
-                                Map<String, Object> userMap = new HashMap<>();
-                                userMap.put(FirebaseID.documentId, user.getUid());
-                                userMap.put(FirebaseID.email,mEmailText.getText().toString());
-                                userMap.put(FirebaseID.password,mPasswordText.getText().toString());
-                                mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap, SetOptions.merge());
-                                finish();
-                            }
-                        } else {
-                            Toast.makeText(SignupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();
 
-                        }
-
-                    }
-                });
-    }
 }

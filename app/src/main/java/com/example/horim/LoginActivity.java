@@ -1,92 +1,37 @@
 package com.example.horim;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity  {
+
+    private GoogleMap mMap;
+
+    private WebView mWebView;
+    private WebSettings mWebSettings;
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
-                finish();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private EditText mEmail,mPassword;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_communication);
+        setContentView(R.layout.activity_signup);
 
-        mEmail= findViewById(R.id.login_email);
-        mPassword= findViewById(R.id.login_password);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mWebView = (WebView)findViewById(R.id.webview_community);
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebSettings = mWebView.getSettings();
+        mWebSettings.setJavaScriptEnabled(true);
 
-        findViewById(R.id.login_signup).setOnClickListener(this);
-        findViewById(R.id.login_success).setOnClickListener(this);
-
-    }
-
-    @Override
-    protected  void onStart(){
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
-            //Toast.makeText(this,"자동 로그인:"+ user.getUid(),Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, Main2Activity.class));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.login_signup:
-                startActivity(new Intent(this ,SignupActivity.class));
-
-                break;
-
-            case R.id.login_success:
-                mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                  FirebaseUser user = mAuth.getCurrentUser();
-                                    if(user !=null) {
-                                     //   Toast.makeText(LoginActivity.this, "로그인 성공:"+ user.getUid(), Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, Main2Activity.class));
-                                    }
-
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Login error.", Toast.LENGTH_SHORT).show();
-
-                                }
-
-                                // ...
-                            }
-                        });
-
-                break;
-        }
+        mWebView.loadUrl("http://15.164.102.145/g5/bbs/board.php?bo_table=free");
     }
 }

@@ -8,30 +8,9 @@
     android:gravity="center_vertical"
     tools:context=".SignupActivity">
 
-    <EditText
-        android:id="@+id/sign_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:hint="E-mail"
-        />
-
-
-    <EditText
-        android:id="@+id/sign_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:hint="Password"
-        />
-
-    <Button
-        android:id="@+id/sign_success"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:textAllCaps="false"
-        android:text="Sign up"
-        android:layout_marginRight="8dp"/>
+    <WebView
+        android:id="@+id/webview_community"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

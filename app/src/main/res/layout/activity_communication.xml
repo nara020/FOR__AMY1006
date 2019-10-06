@@ -8,48 +8,10 @@
     android:gravity="center_vertical"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/login_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@null"
-        android:hint="E-mail"/>
-
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@null"
-        android:hint="password"/>
-    <LinearLayout
+    <WebView
+        android:id="@+id/webview_community"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:layout_height="match_parent" />
 
-
-        <TextView
-            android:id="@+id/login_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Sign up"
-            android:textColor="@android:color/background_dark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <Button
-            android:id="@+id/login_success"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textAllCaps="false"
-            android:text="Login"
-            android:layout_marginRight="8dp"/>
-
-    </LinearLayout>
 
 </LinearLayout>
