@@ -1,6 +1,5 @@
 package com.example.horim.models;
 
-import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
 
@@ -8,7 +7,7 @@ public class Post {
     private String documentId;
     private String title;
     private String contents;
-    @ServerTimestamp
+
     private Date date;
 
     public Post() {

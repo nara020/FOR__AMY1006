@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class chickenActivity extends AppCompatActivity {
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -22,148 +28,65 @@ public class chickenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    Button _1;
-    Button _2;
-    Button _3;
-    Button _4;
-    Button _5;
-    Button _6;
-    Button _7;
-    Button _8;
-    Button _9, _10, _11,_12, _13, _14, _15;
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chicken);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//액션바 생성
 
-        _1=(Button)findViewById(R.id._1);
-        _1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_1.class);
-                startActivity(intent);
-            }
-        });
-        _2=(Button)findViewById(R.id._2);
-        _2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_2.class);
-                startActivity(intent);
-            }
-        });
-        _3=(Button)findViewById(R.id._3);
-        _3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_3.class);
-                startActivity(intent);
-            }
-        });
-        _4=(Button)findViewById(R.id._4);
-        _4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_4.class);
-                startActivity(intent);
-            }
-        });
-        _5=(Button)findViewById(R.id._5);
-        _5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_5.class);
-                startActivity(intent);
-            }
-        });
-        _6=(Button)findViewById(R.id._6);
-        _6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_6.class);
-                startActivity(intent);
-            }
-        });
-        _7=(Button)findViewById(R.id._7);
-        _7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_7.class);
-                startActivity(intent);
-            }
-        });
-        _8=(Button)findViewById(R.id._8);
-        _8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_8.class);
-                startActivity(intent);
-            }
-        });
-        _9=(Button)findViewById(R.id._9);
-        _9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_9.class);
-                startActivity(intent);
-            }
-        });
+                mRecyclerView = findViewById(R.id.recycler_view);
+                mRecyclerView.setHasFixedSize(true);
+                mLayoutManager = new LinearLayoutManager(this);
+                mRecyclerView.setLayoutManager(mLayoutManager);
 
-        _10=(Button)findViewById(R.id._10);
-        _10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_10.class);
-                startActivity(intent);
-            }
-        });
+                ArrayList<FoodInfo> chcikenInfoArrayList = new ArrayList<>();
+                //여기서 값을 입력하면, 어뎁터로 넘어가서 리사이클링리스트뷰 형태로 생성시킨다. 즉 처음에 식당 정보들은 여기서 받고 어뎁터에서 리스트를만든 후 그걸 번들로 새 intent를 열어주면 완성
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.strawberry, "5,000원"));
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.bread, "4,600원"));
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.noodle, "4,000원"));
 
-        _11=(Button)findViewById(R.id._11);
-        _11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_11.class);
-                startActivity(intent);
-            }
-        });
+                MyAdapter myAdapter = new MyAdapter(chickenActivity.this//컨텍스트를 보내줘서 어디서 어드로 갈지에 대해 정보를 줘야한다. this.activity로 사용하지 않기 때문에
+                        ,chcikenInfoArrayList);
 
-        _12=(Button)findViewById(R.id._12);
-        _12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_12.class);
-                startActivity(intent);
-            }
-        });
+                mRecyclerView.setAdapter(myAdapter);
 
-        _13=(Button)findViewById(R.id._13);
-        _13.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_13.class);
-                startActivity(intent);
             }
-        });
+        }
 
-        _14=(Button)findViewById(R.id._14);
-        _14.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_14.class);
-                startActivity(intent);
-            }
-        });
-
-        _15=(Button)findViewById(R.id._1);
-        _15.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(chickenActivity.this, ch_15.class);
-                startActivity(intent);
-            }
-        });
-    }
-}
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        //리사이클러뷰는 리스트뷰처럼 단순 껍데기일뿐이다. 어댑터를 만들어 관리 설정해줘야한다.
+//        recyclerView = findViewById(R.id.recyclerView);
+//
+//        //inearLayoutManager.HORIZONTAL로 넘기는 방향설정 가능 (첫번쨰파라미터는 context 세번쨰파라미터는 아이템이 보이는 방향을 애기한다.)
+//        //세번쨰파라미터는 예를들어 채팅방같은 경우 메세지가 아래에서 위로 올라가는 방향같은거 설정
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false); //레이아웃매니저 생성
+//
+//        recyclerView.setLayoutManager(layoutManager);//만든 레이아웃매니저 객체를(설정을) 리사이클러 뷰에 설정해줌
+//
+//        adapter = new SingerAdapter(getApplicationContext());
+//        //아이템추가
+//        adapter.addItem(new SingerItem("조용필", "010-1111-2222"));
+//        adapter.addItem(new SingerItem("디셈버", "010-3333-4444"));
+//        adapter.addItem(new SingerItem("마마무", "010-5555-3333"));
+//        adapter.addItem(new SingerItem("박효신", "010-4444-8888"));
+//        adapter.addItem(new SingerItem("태진아", "010-0000-9999"));
+//
+//        //어댑터에 연결
+//        recyclerView.setAdapter(adapter);
+//
+//        //어댑터클래스에 직접 이벤트처리관련 코드를 작성해줘야함 (리스트뷰처럼 구현되어있지않음 직접 정의해놔야한다.)
+//        //setOnItemClickListener라는 이름으로 이벤트 메소드 직접 정의한거임
+//        adapter.setOnItemClickListener(new SingerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(SingerAdapter.ViewHolder holder, View view, int position) {
+//                SingerItem item = adapter.getItem(position);
+//                Toast.makeText(getApplicationContext(), "해당 가수가 선택됨==> " + item.getName(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
+//}

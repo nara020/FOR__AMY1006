@@ -44,41 +44,7 @@ public class japanActivity extends AppCompatActivity {
             }
         });
 
-        _2=(Button)findViewById(R.id._2);
-        _2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(japanActivity.this, japan_2.class);
-                startActivity(intent);
-            }
-        });
 
-        _3=(Button)findViewById(R.id._3);
-        _3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(japanActivity.this, japan_3.class);
-                startActivity(intent);
-            }
-        });
-
-        _4=(Button)findViewById(R.id._4);
-        _4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(japanActivity.this, japan_4.class);
-                startActivity(intent);
-            }
-        });
-
-        _5=(Button)findViewById(R.id._5);
-        _5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(japanActivity.this, japan_5.class);
-                startActivity(intent);
-            }
-        });
 
 
     }

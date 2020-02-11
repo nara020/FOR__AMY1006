@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
@@ -15,19 +18,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_like_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDDmFBGs9HyfDTQ-9t6k7mldMOZJ7QnaCE" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".init"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".chickendetail"/>
         <activity android:name=".japanActivity"/>
         <activity android:name=".koreaActivity"/>
         <activity android:name=".languageActivity"/>
@@ -40,91 +47,15 @@
         <activity android:name=".hamburgerActivity"/>
         <activity android:name=".infoActivity"/>
         <activity android:name=".italyActivity"/>
-        <activity android:name=".PostActivity"></activity>
-        <activity android:name=".Main2Activity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".korea_1"/>
-        <activity android:name=".korea_2"/>
-        <activity android:name=".korea_3"/>
-        <activity android:name=".korea_4"/>
-        <activity android:name=".korea_5"/>
-        <activity android:name=".korea_6"/>
-        <activity android:name=".korea_7"/>
-        <activity android:name=".korea_8"/>
-        <activity android:name=".korea_9"/>
-        <activity android:name=".korea_10"/>
-        <activity android:name=".korea_11"/>
-        <activity android:name=".korea_12"/>
-        <activity android:name=".korea_13"/>
-        <activity android:name=".korea_14"/>
-        <activity android:name=".korea_15"/>
-        <activity android:name=".korea_16"/>
-        <activity android:name=".korea_17"/>
-        <activity android:name=".korea_18"/>
-        <activity android:name=".korea_19"/>
-        <activity android:name=".korea_20"/>
-        <activity android:name=".korea_21"/>
-        <activity android:name=".korea_22"/>
-        <activity android:name=".korea_23"/>
-        <activity android:name=".korea_24"/>
-        <activity android:name=".korea_25"/>
-        <activity android:name=".korea_26"/>
-        <activity android:name=".korea_27"/>
-        <activity android:name=".korea_28"/>
-        <activity android:name=".korea_29"/>
-        <activity android:name=".korea_30"/>
-        <activity android:name=".korea_31"/>
-        <activity android:name=".korea_32"/>
-        <activity android:name=".korea_33"/>
-        <activity android:name=".korea_34"/>
-        <activity android:name=".korea_35"/>
-        <activity android:name=".korea_36"/>
         <activity android:name=".china_1"/>
-        <activity android:name=".china_2"/>
-        <activity android:name=".china_3"/>
-        <activity android:name=".china_4"/>
-        <activity android:name=".china_5"/>
-        <activity android:name=".china_6"/>
-        <activity android:name=".china_7"/>
-        <activity android:name=".china_8"/>
-        <activity android:name=".china_9"/>
-        <activity android:name=".china_10"/>
-        <activity android:name=".china_11"/>
         <activity android:name=".japan_1"/>
-        <activity android:name=".japan_2"/>
-        <activity android:name=".japan_3"/>
-        <activity android:name=".japan_4"/>
-        <activity android:name=".japan_5"/>
-        <activity android:name=".ni_1"/>
-        <activity android:name=".ni_2"/>
         <activity android:name=".ni_3"/>
-        <activity android:name=".ni_4"/>
-        <activity android:name=".ni_5"/>
-        <activity android:name=".ni_6"/>
-        <activity android:name=".ni_7"/>
-        <activity android:name=".ni_8"/>
         <activity android:name=".italy_1"/>
-        <activity android:name=".italy_2"/>
-        <activity android:name=".ch_1"/>
-        <activity android:name=".ch_2"/>
-        <activity android:name=".ch_3"/>
-        <activity android:name=".ch_4"/>
-        <activity android:name=".ch_5"/>
-        <activity android:name=".ch_6"/>
-        <activity android:name=".ch_7"/>
-        <activity android:name=".ch_8"/>
-        <activity android:name=".ch_9"/>
-        <activity android:name=".ch_10"/>
-        <activity android:name=".ch_11"/>
-        <activity android:name=".ch_12"/>
-        <activity android:name=".ch_13"/>
-        <activity android:name=".ch_14"/>
-        <activity android:name=".ch_15"/>
         <activity android:name=".pi_1"/>
-        <activity android:name=".pi_2"/>
         <activity android:name=".ham_1"/>
-        <activity android:name=".ham_2"/>
-        </application>
+    </application>
 
 </manifest>

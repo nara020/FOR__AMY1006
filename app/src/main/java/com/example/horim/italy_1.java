@@ -39,8 +39,8 @@ public class italy_1 extends AppCompatActivity
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
-
         mWebView.loadUrl("http://18.221.86.14/test_2.html");
+
     }
 
     public void onMapReady(final GoogleMap googleMap) {

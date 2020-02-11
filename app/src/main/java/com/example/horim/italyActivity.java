@@ -43,13 +43,5 @@ public class italyActivity extends AppCompatActivity {
             }
         });
 
-        _2=(Button)findViewById(R.id._2);
-        _2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(italyActivity.this, italy_2.class);
-                startActivity(intent);
-            }
-        });
     }
 }
