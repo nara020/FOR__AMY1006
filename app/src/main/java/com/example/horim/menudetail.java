@@ -44,10 +44,11 @@ public class menudetail extends AppCompatActivity   {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menudetail);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//액션바 생성
-//
+
+       setContentView(R.layout.menudetail);
 //
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);

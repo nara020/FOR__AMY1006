@@ -1,10 +1,13 @@
 package com.example.horim;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -38,6 +41,8 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
         private WebView mWebView;
         private WebSettings mWebSettings;
 
+    float x;
+    float y;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -50,13 +55,13 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
     }
 
     String title , date, path;
-    TextView textView3, textView4;
+    TextView t, titleLayout;
     ImageView read_image;
     ScrollView mScroll_sv;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,12 +85,88 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-
+            titleLayout = findViewById(R.id.titleLayout);
             mScroll_sv = (ScrollView)findViewById(R.id.scroll_view);
+
+            mRecyclerView.setNestedScrollingEnabled(false);
+
+
+            ViewTreeObserver vto = titleLayout.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        titleLayout.getViewTreeObserver()
+                                .removeOnGlobalLayoutListener(this);
+                    } else {
+                        titleLayout.getViewTreeObserver()
+                                .removeGlobalOnLayoutListener(this);
+                    }
+                     x  = titleLayout.getX();
+                     y = titleLayout.getY();
+
+                    Log.d("MAIN",x+"           + x좌표입니다");
+                    Log.d("MAIN",y+"첫번쨰 입니다");
+
+                }
+            });
+
+
+            Log.d("MAIN",x+"           + x좌표입니다");
+            Log.d("MAIN",y+"5번쨰 입니다");
+
+            mScroll_sv.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(!mScroll_sv.canScrollVertically(1))
+                    {//최하단일때
+                        mRecyclerView.setNestedScrollingEnabled(true);
+                    }
+                    else if(!mScroll_sv.canScrollVertically(-1))
+                    {//최상단일때
+                        mRecyclerView.setNestedScrollingEnabled(false);
+
+                    }
+                    else if(!mRecyclerView.canScrollVertically(-1)) {
+                        mRecyclerView.setNestedScrollingEnabled(false);
+                    }
+                    else if(!mRecyclerView.canScrollVertically(1)) {
+                        mRecyclerView.setNestedScrollingEnabled(true);
+                    }
+                    else {
+                        //idle?
+                        mRecyclerView.setNestedScrollingEnabled(false);
+
+                    }
+
+                    return false;
+                }
+            });
+
             mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    mScroll_sv.requestDisallowInterceptTouchEvent(false);
+                    if(!mScroll_sv.canScrollVertically(1))
+                    {//최하단일때
+                        mRecyclerView.setNestedScrollingEnabled(true);
+                    }
+                    else if(!mScroll_sv.canScrollVertically(-1))
+                    {//최상단일때
+                        mRecyclerView.setNestedScrollingEnabled(false);
+
+                    }
+                    else if(!mRecyclerView.canScrollVertically(-1)) {
+                        mRecyclerView.setNestedScrollingEnabled(false);
+                    }
+                    else if(!mRecyclerView.canScrollVertically(1)) {
+                        mRecyclerView.setNestedScrollingEnabled(true);
+                    }
+                    else {
+                        //idle?
+                        mRecyclerView.setNestedScrollingEnabled(false);
+
+                    }
+
                     return false;
                 }
             });

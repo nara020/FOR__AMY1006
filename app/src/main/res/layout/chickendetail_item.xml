@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
+                android:maxLength="20"
                 android:textSize="20sp"
                 tools:text="빵 위에 꿀과 생크림 존나맛있겟지? 부럽지? 먹고싶지? " />
 
