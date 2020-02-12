@@ -51,7 +51,7 @@
                 android:textSize="20sp"
                 tools:text="5,000원" />
 
-
+ 
             <TextView
                 android:id="@+id/allegi"
                 android:layout_width="232dp"
