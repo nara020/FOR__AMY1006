@@ -52,6 +52,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'dev.dworks.libs:volleyplus:+'
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.2'
+
 
 
 

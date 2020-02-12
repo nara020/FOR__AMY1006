@@ -1,15 +1,18 @@
-package com.example.horim;
+package com.example.horim.adapters;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.horim.chickendetail;
+import com.example.horim.models.FoodInfo;
+import com.example.horim.R;
 
 import java.util.ArrayList;
 
@@ -36,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     }
 
     private ArrayList<FoodInfo> foodInfoArrayList;
-    MyAdapter(Context context,ArrayList<FoodInfo> foodInfoArrayList){
+    public MyAdapter(Context context, ArrayList<FoodInfo> foodInfoArrayList){
         this.foodInfoArrayList = foodInfoArrayList;
         mContext = context;
     }
@@ -55,14 +58,14 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         MyViewHolder myViewHolder = (MyViewHolder) holder;
 
         myViewHolder.ivPicture.setImageResource(foodInfoArrayList.get(position).drawableId);
-        myViewHolder.tvPrice.setText(foodInfoArrayList.get(position).price);
+        myViewHolder.tvPrice.setText(foodInfoArrayList.get(position).store);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle2 = new Bundle();
                 bundle2.putCharSequence("asd","123123");
-                bundle2.putCharSequence("date",foodInfoArrayList.get(position).price);
+                bundle2.putCharSequence("date",foodInfoArrayList.get(position).store);
 
                 Intent intent = new Intent(mContext, chickendetail.class);
                 intent.putExtra("adapter",bundle2);

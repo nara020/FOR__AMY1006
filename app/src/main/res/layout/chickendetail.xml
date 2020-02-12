@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.amar.library.ui.StickyScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scroll_view"
+    app:stickyHeader="@+id/titleLayout"
+    android:fillViewport="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:paddingRight="10px"
+       android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
         android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
-
-    <TextView
-        android:id="@+id/textView3"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="asd1"
-        tools:text="qqqqq" />
+        android:layout_height="200dp" />
+        <TextView
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="gdgd         나는 고정되지롱 ^^~"/>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="asd"
-        tools:text="asdadasdasdasd" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="1500dp"
+            android:background="#dddddd"
 
-    <ImageView
-        android:id="@+id/read_image"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        />
+            />
 
-</LinearLayout>
+        </LinearLayout>
+
+
+
+
+</com.amar.library.ui.StickyScrollView>

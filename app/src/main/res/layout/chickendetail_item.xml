@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="1dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="232dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:textSize="30sp"
+                tools:text="허니 브래드" />
+
+            <TextView
+                android:id="@+id/explain"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textSize="20sp"
+                tools:text="빵 위에 꿀과 생크림 존나맛있겟지? 부럽지? 먹고싶지? " />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textSize="20sp"
+                tools:text="5,000원" />
+
+
+            <TextView
+                android:id="@+id/allegi"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="1dp"
+                android:textSize="20sp"
+                tools:text="알러지 성분 : 그딴거 없음 알고보니 있었ㅠ음 ㅠ 이것  " />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="174dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical">
+<FrameLayout
+    android:layout_width="174dp"
+    android:layout_height="180dp">
+
+
+
+
+    <ImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="163dp"
+        android:layout_height="144dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        tools:src="@drawable/bread" />
+
+    <TextView
+        android:id="@+id/halal"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="80dp"
+        android:textColor="#400"
+        android:paddingLeft="20dp"
+        android:textSize="20sp"
+        tools:text="halal food" />
+</FrameLayout>
+            <TextView
+                android:id="@+id/spicy"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textSize="20sp"
+                android:textColor="#900"
+                tools:text="Spicy +++" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

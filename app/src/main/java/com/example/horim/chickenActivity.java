@@ -1,11 +1,10 @@
 package com.example.horim;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+
+import com.example.horim.adapters.MyAdapter;
+import com.example.horim.models.FoodInfo;
 
 import java.util.ArrayList;
 
@@ -46,9 +45,9 @@ public class chickenActivity extends AppCompatActivity {
 
                 ArrayList<FoodInfo> chcikenInfoArrayList = new ArrayList<>();
                 //여기서 값을 입력하면, 어뎁터로 넘어가서 리사이클링리스트뷰 형태로 생성시킨다. 즉 처음에 식당 정보들은 여기서 받고 어뎁터에서 리스트를만든 후 그걸 번들로 새 intent를 열어주면 완성
-        chcikenInfoArrayList.add(new FoodInfo(R.drawable.strawberry, "5,000원"));
-        chcikenInfoArrayList.add(new FoodInfo(R.drawable.bread, "4,600원"));
-        chcikenInfoArrayList.add(new FoodInfo(R.drawable.noodle, "4,000원"));
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.strawberry, "딸기파는 가계"));
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.bread, "커피집입니다"));
+        chcikenInfoArrayList.add(new FoodInfo(R.drawable.noodle, "짜장면 집이네 "));
 
                 MyAdapter myAdapter = new MyAdapter(chickenActivity.this//컨텍스트를 보내줘서 어디서 어드로 갈지에 대해 정보를 줘야한다. this.activity로 사용하지 않기 때문에
                         ,chcikenInfoArrayList);
