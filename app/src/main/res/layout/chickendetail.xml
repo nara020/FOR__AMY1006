@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scroll_view"
-    app:stickyHeader="@+id/titleLayout"
+    app:stickyHeader="@+id/tabs"
     android:fillViewport="true"
     android:orientation="vertical">
+
     <LinearLayout
-        android:paddingRight="10px"
        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,26 +21,45 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
-        <TextView
-            android:id="@+id/titleLayout"
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="gdgd         나는 고정되지롱 ^^~"/>
+            android:layout_height="wrap_content"
+            app:tabGravity="center"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#000000"
+            android:background="#FFFFFF"
+            >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            <com.google.android.material.tabs.TabItem
+            android:text="@string/menu"
+                android:layout_height="20dp"
+                android:layout_width="20dp" />
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/information"
+                android:layout_height="20dp"
+                android:layout_width="20dp" />
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/review"
+                android:layout_height="20dp"
+                android:layout_width="20dp" />
+
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <android.support.v4.view.ViewPager
+
+            android:id="@+id/pager_content"
+
             android:layout_width="match_parent"
-            android:layout_height="699dp"
-            android:background="#dddddd"
+
+            android:layout_height="match_parent" />
 
 
-            />
 
-        <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="ForAmy"/>
         </LinearLayout>
 
 

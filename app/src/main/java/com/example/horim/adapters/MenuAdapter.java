@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.horim.menudetail;
 import com.example.horim.R;
+import com.example.horim.menudetail;
 import com.example.horim.models.MenuInfo;
 
 import java.util.ArrayList;
