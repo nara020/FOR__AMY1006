@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="80dp"
+        android:paddingBottom="80dp"
+        android:text="식사는 어떠셨나요?"
+        android:textSize="30dp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rating="3"
+        android:layout_gravity="center"
         android:isIndicator="true"
         android:numStars="5"
+        android:rating="3"
         android:stepSize="1" />
 
     <TextView
@@ -19,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center|center_vertical"
+        android:paddingBottom="20dp"
         android:text="만족도 0점을 주셨네요.\n 어떤 점이 좋았나요?"
         android:textSize="15sp" />
 
@@ -30,7 +44,15 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine|textNoSuggestions"
-        android:maxLength="100"
-        tools:text="5글자 이상 입력해주세요. 최대 100글자까지만 가능" />
+        android:maxLength="100" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|center_vertical"
+        android:text="실제로 식당에 방문 하셨나요?" />
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
