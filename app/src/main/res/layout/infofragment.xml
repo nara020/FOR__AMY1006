@@ -1,7 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="1dp"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</fragment>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="248dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="232dp"
+                android:layout_height="220dp"
+                android:layout_marginBottom="70dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:text="허니 브래드"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/explain"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:text="빵 위에 꿀과 생크림 존나맛있겟지? 부럽지? 먹고싶지? "
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:text="5,000원"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:id="@+id/allegi"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="1dp"
+                    android:text="알러지 성분 : 그딴거 없음 알고보니 있었ㅠ음 ㅠ 이것  "
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="174dp"
+                android:layout_height="220dp"
+                android:layout_marginBottom="70dp"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="174dp"
+                    android:layout_height="180dp">
+
+
+                    <ImageView
+                        android:id="@+id/iv_picture"
+                        android:layout_width="163dp"
+                        android:layout_height="144dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/bread" />
+
+                    <TextView
+                        android:id="@+id/halal"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="80dp"
+                        android:paddingLeft="20dp"
+                        android:text="halal food"
+                        android:textColor="#400"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/spicy"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="Spicy +++"
+                    android:textColor="#900"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:text="빵    위에 꿀과 생크림 존나맛있겟지? 부럽지? 먹고싶지? 설명을 계속해서 합니다. 엄청나게 길게 쓰면 화면이 끝날떄 까지 쓸 수 있습니다. 근데 이렇게 까지 하고 싶을까요 사장님들이 ? 추가로 여기에 알르레기 데이터를 받는다. 알레르기, 등등 글들의 글자가 넘어가서 다 못표시된것들을 여기에 한번더 표시해줄까?  "
+            android:textSize="25sp" />
+    </LinearLayout>
+</ScrollView>
+

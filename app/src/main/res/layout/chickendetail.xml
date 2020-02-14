@@ -1,68 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.amar.library.ui.StickyScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scroll_view"
-    app:stickyHeader="@+id/tabs"
-    android:fillViewport="true"
-    android:orientation="vertical">
+    tools:context=".chickendetail"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways">
 
-    <LinearLayout
-       android:orientation="vertical"
+
+
+
+    <com.amar.library.ui.StickyScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:stickyHeader="@+id/tab_layout"
         >
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabGravity="center"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="#000000"
-            android:background="#FFFFFF"
-            >
-
-            <com.google.android.material.tabs.TabItem
-            android:text="@string/menu"
-                android:layout_height="20dp"
-                android:layout_width="20dp" />
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/information"
-                android:layout_height="20dp"
-                android:layout_width="20dp" />
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/review"
-                android:layout_height="20dp"
-                android:layout_width="20dp" />
+            android:orientation="vertical">
 
 
 
-        </com.google.android.material.tabs.TabLayout>
 
-        <android.support.v4.view.ViewPager
-
-            android:id="@+id/pager_content"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="match_parent" />
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
 
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+
+                app:tabSelectedTextColor="#000000" />
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="780dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
         </LinearLayout>
 
 
-
-
-</com.amar.library.ui.StickyScrollView>
+    </com.amar.library.ui.StickyScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

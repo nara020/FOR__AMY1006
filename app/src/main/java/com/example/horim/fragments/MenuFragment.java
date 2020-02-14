@@ -1,5 +1,7 @@
 package com.example.horim.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,26 +23,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import static com.example.horim.chickendetail.mScroll_sv;
+
 public class MenuFragment extends Fragment {
     ViewPager viewPager;
-    ScrollView mScroll_sv;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
 
-    public MenuFragment(){
-
-    }
+    @SuppressLint("ClickableViewAccessibility")
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.menufragment, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.menufragment,container,false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        //  titleLayout = findViewById(R.id.titleLayout);
-        mScroll_sv = (ScrollView)view.findViewById(R.id.scroll_view);
+//        //  titleLayout = findViewById(R.id.titleLayout);
 
+
+
+        출처: https://itpangpang.xyz/143 [ITPangPang]
+
+
+        //
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.scrollToPosition(0);
 
@@ -68,6 +76,7 @@ public class MenuFragment extends Fragment {
 //
 //            Log.d("MAIN",x+"           + x좌표입니다");
 //            Log.d("MAIN",y+"5번쨰 입니다");
+//
 
         mScroll_sv.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -145,7 +154,7 @@ public class MenuFragment extends Fragment {
 
 
 
-        return view;
+        return rootView;
 
     }
 

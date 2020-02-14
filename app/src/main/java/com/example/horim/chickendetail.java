@@ -5,21 +5,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.horim.adapters.SectionPageAdapter;
-import com.example.horim.adapters.MenuAdapter;
+import com.example.horim.adapters.PagerAdapter;
 import com.example.horim.fragments.InfoFragment;
 import com.example.horim.fragments.MenuFragment;
 import com.example.horim.fragments.ReviewFragment;
-import com.example.horim.models.MenuInfo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,10 +24,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -40,10 +34,7 @@ import androidx.viewpager.widget.ViewPager;
 public class chickendetail extends AppCompatActivity implements OnMapReadyCallback {
 
         private GoogleMap mMap;
-    boolean moreSwitcher;
-        private WebView mWebView;
-        private WebSettings mWebSettings;
-    TextView infoView;
+
     float x;
     float y;
 
@@ -61,28 +52,76 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
     RatingBar ratingBar;
     String title , date, path;
     ImageView read_image;
-    ScrollView mScroll_sv;
+    public static ScrollView mScroll_sv;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     ViewPager mViewPager;
-    SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
-
+    InfoFragment infoFragment ;
+    MenuFragment menuFragment ;
+    ReviewFragment reviewFragment ;
 
     @SuppressLint({"SetJavaScriptEnabled", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chickendetail);
+        infoFragment = new InfoFragment();
+        menuFragment = new MenuFragment();
+        reviewFragment = new ReviewFragment();
+//최초 시작 프레그먼트 지정 (맨처음에 몇번을 보여줄지
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container,menuFragment).commit();
+        //탭 레이아웃 호출 후 탭 추가
 
-        //------------뷰페이저
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
+        tabs.addTab(tabs.newTab().setText("메뉴"));
+        tabs.addTab(tabs.newTab().setText("가게 정보"));
+        tabs.addTab(tabs.newTab().setText("리뷰"));
+        //각 탭을 누를 때 메소드 호출
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                //몇번째 탭을 선택했는지 가져옴
+                int position = tab.getPosition();
+
+                //탭을 선택 한것에 따라 프래그먼트를 바꾼다.
+                Fragment selected = null;
+                if(position == 0){
+                    selected = menuFragment;
+                }
+                else if(position == 1){
+                    selected = infoFragment;
+                }
+                else if(position == 2){
+                    selected = reviewFragment;
+                }
+
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
+                        R.anim.fade_out)
+                        .replace(R.id.container,selected).commit();
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
-        //-------------뷰페이저 아래 setupViewPager 함수 정의
+
+
+
+
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//액션바 생성
 
 
@@ -97,13 +136,13 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
 
 
 
-//            mRecyclerView = findViewById(R.id.recycler_view);
+//            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 //            mRecyclerView.setHasFixedSize(true);
 //            mLayoutManager = new LinearLayoutManager(this);
 //            mRecyclerView.setLayoutManager(mLayoutManager);
-//          //  titleLayout = findViewById(R.id.titleLayout);
-//            mScroll_sv = (ScrollView)findViewById(R.id.scroll_view);
-//
+          //  titleLayout = findViewById(R.id.titleLayout);
+            mScroll_sv = (ScrollView)findViewById(R.id.scroll_view);
+
 //            mRecyclerView.setNestedScrollingEnabled(false);
 //
 //
@@ -130,7 +169,7 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
 ////
 ////            Log.d("MAIN",x+"           + x좌표입니다");
 ////            Log.d("MAIN",y+"5번쨰 입니다");
-//
+
 //            mScroll_sv.setOnTouchListener(new View.OnTouchListener() {
 //                @Override
 //                public boolean onTouch(View v, MotionEvent event) {
@@ -158,7 +197,6 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
 //                    return false;
 //                }
 //            });
-//
 //            mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
 //                @Override
 //                public boolean onTouch(View v, MotionEvent event) {
@@ -221,38 +259,27 @@ public class chickendetail extends AppCompatActivity implements OnMapReadyCallba
 
 
 //---------------------------------------------------------------아래로 레이팅바
-        ratingBar = (RatingBar)findViewById(R.id.ratingBar);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-
-            @Override
-
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-
-                // 저는 0개를 주기싫어서, 만약 1개미만이면 강제로 1개를 넣었습니다.
-
-                if (ratingBar.getRating()<1.0f){
-
-                    ratingBar.setRating(1);
-
-                }
-
-            }
-
-        });
-
-        Button expand = (Button)findViewById(R.id.expand);
-onMoreClick(expand);
+//        ratingBar = (RatingBar)findViewById(R.id.ratingBar);
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//
+//            @Override
+//
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//
+//                // 저는 0개를 주기싫어서, 만약 1개미만이면 강제로 1개를 넣었습니다.
+//
+//                if (ratingBar.getRating()<1.0f){
+//
+//                    ratingBar.setRating(1);
+//
+//                }
+//
+//            }
+//
+//        });
 
 
 
-
-    }
-
-    public void setupViewPager(ViewPager viewPager) {
-        adapter.addFragment(new MenuFragment(),"메뉴");
-        adapter.addFragment(new InfoFragment(),"가게 정보");
-        adapter.addFragment(new ReviewFragment(),"리뷰");
-        viewPager.setAdapter(adapter);
     }
 
 
@@ -260,24 +287,6 @@ onMoreClick(expand);
 
 
        // ------------------------------------------------------여기까지
-//----------------------------------------------------------------------------- 사장님 공지 접었따 폈다시키기
-
-    public void onMoreClick(View v) {
-        Button btn = (Button) v;
-
-        if(!moreSwitcher) {
-            infoView.setMaxLines(infoView.getLineCount());
-            infoView.setLines(infoView.getLineCount());
-            moreSwitcher = true;
-            btn.setText("축소");
-        }else{
-            infoView.setMaxLines(5);
-            infoView.setLines(5);
-            moreSwitcher = false;
-            btn.setText("확장");
-        }
-    }
-//-------------------------------------------------------------------------------
 
         public void onMapReady(final GoogleMap googleMap) {
 

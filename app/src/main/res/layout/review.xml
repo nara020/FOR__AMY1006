@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/review">
+    android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="사장님 공지" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:text="사장님 공지"
+        android:textSize="20sp" />
 
     <TextView
-        android:layout_width="match_parent"
         android:id="@+id/infoview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:maxLines="5"
-        android:lines="5"
-        android:text="아마도\n한\네\n다섯줄정도\n쓰지않을까 싶다\n이정도 ?? 그치\n 근데 더쓸 수도있으니깐\n대비는\n해놔야지"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        />
+        android:lines="5"
+        android:maxLines="5"
+        android:text="아마도\n한\네\n다섯줄정도\n쓰지않을까 싶다\n이정도 ?? 그치\n 근데 더쓸 수도있으니깐\n대비는\n해놔야지"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/expand"
-        android:background="@+id/expand_activities_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:text="확장" />
 
 </LinearLayout>
